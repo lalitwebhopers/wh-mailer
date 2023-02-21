@@ -1,0 +1,55 @@
+{
+    "name": "lalitwebhopers/wh-mailer",
+    "description": "WH Mailer a product of Webhopers Infotech.",
+    "keywords": [
+        "lalitwebhopers",
+        "wh-mailer"
+    ],
+    "homepage": "https://github.com/lalitwebhopers/wh-mailer",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Lalit Kumar",
+            "email": "lalit.webhopers@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "guzzlehttp/guzzle": "*",
+        "illuminate/support": "^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lalitwebhopers\\WhMailer\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Lalitwebhopers\\WhMailer\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Lalitwebhopers\\WhMailer\\WhMailerServiceProvider"
+            ],
+            "aliases": {
+                "WhMailer": "Lalitwebhopers\\WhMailer\\WhMailerFacade"
+            }
+        }
+    }
+}
