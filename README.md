@@ -1,10 +1,4 @@
-# Very short description of the package
-
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/lalitwebhopers/wh-mailer.svg?style=flat-square)](https://packagist.org/packages/lalitwebhopers/wh-mailer)
-[![Total Downloads](https://img.shields.io/packagist/dt/lalitwebhopers/wh-mailer.svg?style=flat-square)](https://packagist.org/packages/lalitwebhopers/wh-mailer)
-![GitHub Actions](https://github.com/lalitwebhopers/wh-mailer/actions/workflows/main.yml/badge.svg)
-
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+# WH Mailer
 
 ## Installation
 
@@ -16,14 +10,47 @@ composer require lalitwebhopers/wh-mailer
 
 ## Usage
 
+### Add the following code to file "app/config/services.php"
+
 ```php
-// Usage description here
+'whmailer' => [
+  'url' => env('WHMAILER_URL'),
+  'key' => env('WHMAILER_API_KEY')
+],
 ```
 
-### Testing
+### Update the following code to file "app/config/mail.php"
 
-```bash
-composer test
+```php
+'default' => env('MAIL_MAILER', 'whmailer'),
+```
+
+### Add the following code to file "app/config/mail.php"
+add the following code inside 'mailers' array.
+```php
+'whmailer' => [
+  'transport' => 'whmailer',
+],
+```
+
+### Update the file ".env"
+
+```php
+MAIL_MAILER='whmailer'
+WHMAILER_URL='http://netmail.whdev.in:5000/api/mailer/send-text'
+WHMAILER_API_KEY='Your API Key provided by WHMailer'
+```
+
+### Update the file "app/config/app.php"
+inside 'providers' array comment the default 'MailServiceProvider' & add 'WHMailerServiceProvider'.
+
+```php
+'providers' => [
+ ...
+ // Illuminate\Mail\MailServiceProvider::class,
+ Lalitwebhopers\WhMailer\WhMailerServiceProvider::class,
+ ...
+]
 ```
 
 ### Changelog
@@ -46,7 +73,3 @@ If you discover any security related issues, please email lalit.webhopers@gmail.
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-## Laravel Package Boilerplate
-
-This package was generated using the [Laravel Package Boilerplate](https://laravelpackageboilerplate.com).
